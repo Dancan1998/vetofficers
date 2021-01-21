@@ -27,7 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '7z(= % qjl=o52 & +3s4v & @23ok2le8mx*2r11e7tasu %) = f!r29+'
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+# DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'rest_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,8 +86,8 @@ WSGI_APPLICATION = 'rest_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('NAME'),
-        'PASSWORD': config('PASSWORD'),
+        'NAME': 'tutorial',
+        'PASSWORD': 'shanghai2017',
         'HOST': 'localhost',
         'USER': 'postgres',
     }
@@ -129,8 +130,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'build/static']
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # CORS_ALLOWED_ORIGINS = [
